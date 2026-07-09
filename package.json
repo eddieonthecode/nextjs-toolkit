@@ -24,6 +24,8 @@
   "scripts": {
     "prebuild": "node scripts/prebuild.cjs",
     "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepublishOnly": "node scripts/prebuild.cjs --publish && tsc"
   },
   "files": [
@@ -43,7 +45,8 @@
     "class-validator": "^0.15.1",
     "next": "^15.0.0",
     "react-hook-form": "^7.73.1",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "vitest": "^4.1.10"
   },
   "exports": {
     "./api": {
