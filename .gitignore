@@ -1,0 +1,7 @@
+.turbo
+
+dist
+
+node_modules
+
+AGENTS.md

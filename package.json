@@ -1,0 +1,62 @@
+{
+  "name": "@e12e/nextjs-toolkit",
+  "version": "1.0.0",
+  "description": "Next.js toolkit for form handling and API routes",
+  "author": "e12e - eddieonthecode",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eddieonthecode/nextjs-tookit.git"
+  },
+  "homepage": "https://github.com/eddieonthecode/nextjs-tookit#readme",
+  "bugs": {
+    "url": "https://github.com/eddieonthecode/nextjs-tookit/issues"
+  },
+  "keywords": [
+    "nextjs",
+    "next.js",
+    "react-hook-form",
+    "form",
+    "api",
+    "toolkit"
+  ],
+  "type": "module",
+  "scripts": {
+    "prebuild": "node scripts/prebuild.cjs",
+    "build": "tsc",
+    "prepublishOnly": "node scripts/prebuild.cjs --publish && tsc"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@e12e/ts-omni": "^2.0.1"
+  },
+  "peerDependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "next": "^15.0.0",
+    "react-hook-form": "^7.53.0"
+  },
+  "devDependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "next": "^15.0.0",
+    "react-hook-form": "^7.73.1",
+    "typescript": "5.5.4"
+  },
+  "exports": {
+    "./api": {
+      "types": "./src/api/index.ts",
+      "import": "./dist/api/index.js",
+      "require": "./dist/api/index.js",
+      "default": "./dist/api/index.js"
+    },
+    "./form": {
+      "types": "./src/form/index.ts",
+      "import": "./dist/form/index.js",
+      "require": "./dist/form/index.js",
+      "default": "./dist/form/index.js"
+    }
+  }
+}
