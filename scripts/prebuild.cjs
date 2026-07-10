@@ -46,9 +46,7 @@ const exportMap = {};
 for (const p of barrelPaths) {
   const distRoot = p === '.' ? 'index' : p.slice(2) + '/index';
 
-  const typesPath = isPublish 
-    ? `./dist/${distRoot}.d.ts` 
-    : `./src/${distRoot}.ts`;
+  const typesPath = `./dist/${distRoot}.d.ts`;
 
   exportMap[p] = {
     types: typesPath,

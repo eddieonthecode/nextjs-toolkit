@@ -7,11 +7,10 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@e12e/ts-omni':
-        specifier: ^2.0.1
-        version: 2.0.1(class-transformer@0.5.1)(class-validator@0.15.1)
     devDependencies:
+      '@e12e/ts-omni':
+        specifier: ^2.0.2
+        version: 2.0.2(class-transformer@0.5.1)(class-validator@0.15.1)
       '@vitest/ui':
         specifier: ^4.1.10
         version: 4.1.10(vitest@4.1.10)
@@ -36,8 +35,8 @@ importers:
 
 packages:
 
-  '@e12e/ts-omni@2.0.1':
-    resolution: {integrity: sha512-RbIY7QXdYSyiI9f6wXcT2rWBp9X9A3rLU65w3fI9ac+5So/359wS3uR/zSGd4G9tUaPHeChlQ9x7YCT93I/INg==}
+  '@e12e/ts-omni@2.0.2':
+    resolution: {integrity: sha512-TUi7Em4bt7zkK0RjaaqGN795G+k1a2df2Djbt51ulJlOegGXuLOenS+QFHPy5Z4yiMqu+UvM7iygd7ihC2J//w==}
     engines: {node: '>=18'}
     peerDependencies:
       class-transformer: ^0.5.1
@@ -808,7 +807,7 @@ packages:
 
 snapshots:
 
-  '@e12e/ts-omni@2.0.1(class-transformer@0.5.1)(class-validator@0.15.1)':
+  '@e12e/ts-omni@2.0.2(class-transformer@0.5.1)(class-validator@0.15.1)':
     dependencies:
       class-transformer: 0.5.1
       class-validator: 0.15.1

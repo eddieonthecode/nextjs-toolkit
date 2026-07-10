@@ -1,6 +1,6 @@
 {
   "name": "@e12e/nextjs-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Next.js toolkit for form handling and API routes",
   "author": "e12e - eddieonthecode",
   "license": "MIT",
@@ -32,16 +32,15 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "@e12e/ts-omni": "^2.0.1"
-  },
   "peerDependencies": {
+    "@e12e/ts-omni": "^2.0.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
     "next": "^15.0.0",
     "react-hook-form": "^7.53.0"
   },
   "devDependencies": {
+    "@e12e/ts-omni": "^2.0.2",
     "@vitest/ui": "^4.1.10",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
