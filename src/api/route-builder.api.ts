@@ -121,16 +121,30 @@ export interface NextRouteBuilderOptions {
 }
 
 function toNextResponse(input: ApiResponse): NextResponse {
-  const s = input as any;
-  const body = s.body;
-  const init = s.responseInit ?? {};
+  const init = input.getResponseInit() ?? {};
+  const status = init.status ?? 200;
+  const headers: Record<string, string> = init.headers ?? {};
+  const cookies: Cookie[] = init.cookies ?? [];
 
-  const response = NextResponse.json(body, {
-    status: init.status ?? 200,
-    headers: init.headers,
-  });
+  let response: NextResponse;
 
-  (init.cookies ?? []).forEach((c: Cookie) => {
+  if (input.getIsRedirect()) {
+    response = NextResponse.redirect(input.getRedirectUrl(), status);
+  } else {
+    const body = input.getBody();
+    const isBinary =
+      body instanceof Uint8Array ||
+      body instanceof ArrayBuffer ||
+      body instanceof ReadableStream;
+    const isJson = typeof body === "object" && body !== null && !isBinary;
+
+    response =
+      isJson
+        ? NextResponse.json(body, { status, headers })
+        : new NextResponse((body ?? null) as BodyInit, { status, headers });
+  }
+
+  cookies.forEach((c) => {
     response.cookies.set(c.name, c.value, c.options as any);
   });
 

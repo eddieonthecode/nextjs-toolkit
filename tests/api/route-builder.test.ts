@@ -427,3 +427,70 @@ describe("createRouteBuilder", () => {
     expect(guard).toHaveBeenCalledTimes(2);
   });
 });
+
+describe("toNextResponse content types", () => {
+  it("should return redirect response", async () => {
+    const handler = new NextRouteBuilder().handle(() => {
+      return ApiResponse.redirect("https://example.com/dashboard", {
+        status: 301,
+      });
+    });
+
+    const req = createMockRequest();
+    const ctx = createMockContext();
+    const response = await handler(req, ctx);
+
+    expect(response.status).toBe(301);
+    expect(response.headers.get("location")).toBe(
+      "https://example.com/dashboard"
+    );
+  });
+
+  it("should return raw html with text/html content-type", async () => {
+    const handler = new NextRouteBuilder().handle(() => {
+      return ApiResponse.html("<h1>Hello</h1>", {
+        status: 200,
+        headers: { "Content-Type": "text/html; charset=UTF-8" },
+      });
+    });
+
+    const req = createMockRequest();
+    const ctx = createMockContext();
+    const response = await handler(req, ctx);
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get("content-type")).toContain("text/html");
+    expect(await response.text()).toBe("<h1>Hello</h1>");
+  });
+
+  it("should return binary body without json serialization", async () => {
+    const bytes = new Uint8Array([1, 2, 3, 4]);
+    const handler = new NextRouteBuilder().handle(() => {
+      return new ApiResponse(bytes, {
+        status: 200,
+        headers: { "Content-Type": "application/octet-stream" },
+      });
+    });
+
+    const req = createMockRequest();
+    const ctx = createMockContext();
+    const response = await handler(req, ctx);
+
+    expect(response.status).toBe(200);
+    const buf = new Uint8Array(await response.arrayBuffer());
+    expect(Array.from(buf)).toEqual([1, 2, 3, 4]);
+  });
+
+  it("should handle null body", async () => {
+    const handler = new NextRouteBuilder().handle(() => {
+      return new ApiResponse(null, { status: 204 });
+    });
+
+    const req = createMockRequest();
+    const ctx = createMockContext();
+    const response = await handler(req, ctx);
+
+    expect(response.status).toBe(204);
+    expect(await response.text()).toBe("");
+  });
+});
